@@ -14,7 +14,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UILongPressGestureRecognizer* gr = [[[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector( onShowMenu: ) ] autorelease];
+    [self.view addGestureRecognizer: gr];
 }
+
 
 - (IBAction)btnActionClicked:(id)sender {
     if ([(UIButton *)sender tag] == 10) {
@@ -24,9 +28,15 @@
          [[CAPasteBoard sharedPasteBoard] addItem:[UIImage imageNamed:@"download.jpeg"]];
     }
     else if ([(UIButton *)sender tag] == 12) {
+         [self becomeFirstResponder];
         [[CAPasteBoard sharedPasteBoard] showClipBoardToView:self.view];
     }
 }
+
+- (BOOL) canBecomeFirstResponder {
+    return YES;
+}
+
 
 
 @end
